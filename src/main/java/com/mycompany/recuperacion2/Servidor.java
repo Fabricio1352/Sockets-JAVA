@@ -41,8 +41,10 @@ class ClienteHandler implements Runnable {
 
             System.out.println("Atendiendo al cliente: " + cliente.getInetAddress().getHostAddress());
 
-            String tipoAlmacenamiento = "bd"; // Cambiar a "bd"  "texto"
-            AlmacenamientoDAO almacenamiento = AlmacenFactory.getAlmacenamiento(tipoAlmacenamiento);
+            //String tipoAlmacenamiento = "bd"; // Cambiar a "bd"  "texto"
+            GestorEstrategia g = new GestorEstrategia("texto");
+            //g.setEstrategiaDAO(AlmacenFactory.getAlmacenamiento("texto"));
+            //EstrategiaDAO almacenamiento = AlmacenFactory.getAlmacenamiento(tipoAlmacenamiento);
 
             while (true) {
                 try {
@@ -51,26 +53,27 @@ class ClienteHandler implements Runnable {
                     switch (accion) {
                         case "guardar":
                             Persona persona = (Persona) in.readObject();
-                            almacenamiento.guardar(persona);
+                            //almacenamiento.guardar(persona);
+                            g.guardar(persona);
                             out.writeObject("Datos guardados exitosamente");
                             break;
 
                         case "consultarPorID":
                             int idConsulta = (Integer) in.readObject();
-                            Persona personaConsultada = almacenamiento.consultarPorID(idConsulta);
+                            Persona personaConsultada = g.consultarPorID(idConsulta);//almacenamiento.consultarPorID(idConsulta);
                             if (personaConsultada != null) {
                                 out.writeObject(personaConsultada);
                             } else {
-                                out.writeObject("No se encontró ninguna persona con ese ID.");
+                                out.writeObject("No se encontro ninguna persona con ese ID.");
                             }
                             break;
 
                         case "consultarTodos":
-                            out.writeObject(almacenamiento.consultarTodos());
+                            out.writeObject(g.consultarTodos());//almacenamiento.consultarTodos());
                             break;
 
                         default:
-                            out.writeObject("Acción no reconocida.");
+                            out.writeObject("Accion no reconocida.");
                     }
                 } catch (EOFException e) {
                     System.out.println("Cliente desconectado: " + cliente.getInetAddress().getHostAddress());

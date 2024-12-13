@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Fabricio
  */
-public interface AlmacenamientoDAO {
+public interface EstrategiaDAO {
     void guardar(Persona persona);
     List<Persona> consultarTodos();
     Persona consultarPorID(int id);

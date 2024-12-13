@@ -1,8 +1,9 @@
-com\mycompany\recuperacion2\AlmacenamientoTexto.class
 com\mycompany\recuperacion2\Servidor.class
 com\mycompany\recuperacion2\AlmacenFactory.class
 com\mycompany\recuperacion2\Persona.class
+com\mycompany\recuperacion2\DAOTexto.class
 com\mycompany\recuperacion2\Cliente.class
-com\mycompany\recuperacion2\AlmacenamientoDB.class
+com\mycompany\recuperacion2\EstrategiaDAO.class
 com\mycompany\recuperacion2\ClienteHandler.class
-com\mycompany\recuperacion2\AlmacenamientoDAO.class
+com\mycompany\recuperacion2\DAODatabase.class
+com\mycompany\recuperacion2\GestorEstrategia.class

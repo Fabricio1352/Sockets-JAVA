@@ -11,15 +11,28 @@ import java.util.*;
  *
  * @author Fabricio
  */
-public class AlmacenamientoDB implements AlmacenamientoDAO {
+public class DAODatabase implements EstrategiaDAO {
+
     private static final String URL = "jdbc:mysql://localhost:3306/recuperacion";
     private static final String USER = "root";
     private static final String PASSWORD = "agiles123!!";
 
+    private static DAODatabase instance;
+
+    private DAODatabase() {
+    }
+
+    public static DAODatabase getInstance() {
+        if (instance == null) {
+            instance = new DAODatabase();
+        }
+        return instance;
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-   
+
     @Override
     public void guardar(Persona persona) {
         String query = "INSERT INTO personas (id, nombre, edad) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE nombre = ?, edad = ?";
@@ -42,9 +55,9 @@ public class AlmacenamientoDB implements AlmacenamientoDAO {
         try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 Persona persona = new Persona(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getInt("edad")
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getInt("edad")
                 );
                 personas.add(persona);
             }
@@ -54,7 +67,7 @@ public class AlmacenamientoDB implements AlmacenamientoDAO {
         return personas;
     }
 
-   @Override
+    @Override
     public Persona consultarPorID(int id) {
         String query = "SELECT * FROM personas WHERE id = ?";
         try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -62,9 +75,9 @@ public class AlmacenamientoDB implements AlmacenamientoDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new Persona(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getInt("edad")
+                            rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getInt("edad")
                     );
                 }
             }
@@ -73,5 +86,5 @@ public class AlmacenamientoDB implements AlmacenamientoDAO {
         }
         return null;
     }
-    
+
 }

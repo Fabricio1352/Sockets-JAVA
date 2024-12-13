@@ -16,10 +16,23 @@ import java.util.List;
  *
  * @author Fabricio
  */
-public class AlmacenamientoTexto implements AlmacenamientoDAO  {
+public class DAOTexto implements EstrategiaDAO {
+
     private static final String FILE_PATH = "personas.txt";
 
-      @Override
+    private static DAOTexto instance;
+
+    private DAOTexto() {
+    }
+
+    public static DAOTexto getInstance() {
+        if (instance == null) {
+            instance = new DAOTexto();
+        }
+        return instance;
+    }
+
+    @Override
     public void guardar(Persona persona) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(persona.getId() + "," + persona.getNombre() + "," + persona.getEdad());
@@ -29,7 +42,6 @@ public class AlmacenamientoTexto implements AlmacenamientoDAO  {
         }
     }
 
-
     @Override
     public List<Persona> consultarTodos() {
         List<Persona> personas = new ArrayList<>();
@@ -38,9 +50,9 @@ public class AlmacenamientoTexto implements AlmacenamientoDAO  {
             while ((linea = reader.readLine()) != null) {
                 String[] datos = linea.split(",");
                 Persona persona = new Persona(
-                    Integer.parseInt(datos[0]),
-                    datos[1],
-                    Integer.parseInt(datos[2])
+                        Integer.parseInt(datos[0]),
+                        datos[1],
+                        Integer.parseInt(datos[2])
                 );
                 personas.add(persona);
             }
@@ -50,12 +62,11 @@ public class AlmacenamientoTexto implements AlmacenamientoDAO  {
         return personas;
     }
 
-
-     @Override
+    @Override
     public Persona consultarPorID(int id) {
         return consultarTodos().stream()
-            .filter(persona -> persona.getId() == id)
-            .findFirst()
-            .orElse(null);
+                .filter(persona -> persona.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }

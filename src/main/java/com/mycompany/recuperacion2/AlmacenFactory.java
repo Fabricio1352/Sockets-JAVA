@@ -9,12 +9,12 @@ package com.mycompany.recuperacion2;
  * @author Fabricio
  */
 public class AlmacenFactory {
-    public static AlmacenamientoDAO getAlmacenamiento(String tipo) {
+    public static EstrategiaDAO getAlmacenamiento(String tipo) {
         switch (tipo.toLowerCase()) {
             case "texto":
-                return new AlmacenamientoTexto();
+                return DAOTexto.getInstance();
             case "bd":
-                return new AlmacenamientoDB();
+                return DAODatabase.getInstance();
             default:
                 throw new IllegalArgumentException("Tipo de almacenamiento no soportado");
         }

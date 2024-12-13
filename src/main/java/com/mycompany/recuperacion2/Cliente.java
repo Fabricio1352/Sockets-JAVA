@@ -22,11 +22,11 @@ public class Cliente {
                  ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                  ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-                System.out.println("Conexión establecida con el servidor.");
+                System.out.println("Conexion establecida con el servidor.");
 
                 boolean continuar = true;
                 while (continuar) {
-                    System.out.println("\nMenú:");
+                    System.out.println("\nMenu:");
                     System.out.println("1. Guardar una persona");
                     System.out.println("2. Consultar persona por ID");
                     System.out.println("3. Consultar todas las personas");
@@ -64,7 +64,7 @@ public class Cliente {
                             if (respuestaConsulta instanceof Persona) {
                                 System.out.println("Persona encontrada: " + respuestaConsulta);
                             } else {
-                                System.out.println("No se encontró ninguna persona con el ID proporcionado.");
+                                System.out.println("No se encontro ninguna persona con el ID proporcionado.");
                             }
                             break;
 
@@ -89,16 +89,16 @@ public class Cliente {
                             break;
 
                         default:
-                            System.out.println("Opción no válida. Intenta de nuevo.");
+                            System.out.println("Opcion no valida. Intenta de nuevo.");
                     }
                 }
 
             } catch (Exception e) {
-                System.err.println("Error en la conexión con el servidor: " + e.getMessage());
+                System.err.println("Error en la conexion con el servidor: " + e.getMessage());
                 e.printStackTrace();
             }
         });
 
-        clientThread.start(); // Iniciar el hilo
+        clientThread.start(); 
     }
 }
