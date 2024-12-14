@@ -25,3 +25,6 @@ INSTRUCCIONES:
    ![image](https://github.com/user-attachments/assets/575c9443-2973-412b-af74-a4258179b566)
 
 ![image](https://github.com/user-attachments/assets/080e8124-8ac5-477e-ab8f-553c68956b10)
+
+
+![DC](https://github.com/user-attachments/assets/9eb40b5d-99c4-44fc-bc7c-54339ab00958)
